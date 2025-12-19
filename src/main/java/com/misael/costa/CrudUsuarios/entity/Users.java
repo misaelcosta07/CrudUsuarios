@@ -1,6 +1,7 @@
 package com.misael.costa.CrudUsuarios.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -11,6 +12,7 @@ public class Users {
     private Long id;
 
     @Column(nullable = false)
+    @Size(min = 2, max = 30)
     private String name;
 
     @Column(nullable = false, unique = true)
