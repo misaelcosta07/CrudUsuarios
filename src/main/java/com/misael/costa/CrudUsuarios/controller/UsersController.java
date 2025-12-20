@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @Tag(name = "cadastrados", description = "gerenciador de cadastro")
+@CrossOrigin(origins = "*")
 public class UsersController {
 
     @Autowired
@@ -22,22 +23,19 @@ public class UsersController {
     @GetMapping("/list")
     @Operation(summary = "Listar usuarios", description = "Lista todos os usuarios cadastrados, salvos no DB.")
     public ResponseEntity<List<Users>> listUser(){
-       List<Users> users = usersService.listUser();
-        return ResponseEntity.status(200).body(users);
+        return ResponseEntity.status(200).body(usersService.listUser());
     }
     // adicionar (post)
     @PostMapping("/create")
     @Operation(summary = "Cradastrar usuarios", description = "Cria e cadastra o usuario no DB")
     public ResponseEntity<Users> createUsers(@RequestBody Users user){
-      Users userNovo =  usersService.createUser(user);
-        return ResponseEntity.status(201).body(userNovo);
+        return ResponseEntity.status(201).body( usersService.createUser(user));
     }
     // update - editar (put)
     @PutMapping("/{id}")
     @Operation(summary = "Altera dados dos usuarios", description = "atualiza dados do usuario ja salvo no DB por ID.")
     public ResponseEntity<Users> editarById(@PathVariable Long id, @RequestBody Users user) {
-      Users userNovo =  usersService.update(id, user);
-            return ResponseEntity.status(201).body(userNovo);
+            return ResponseEntity.status(200).body(usersService.update(id, user));
     }
     // deletar (delete)
     @DeleteMapping("/{id}")

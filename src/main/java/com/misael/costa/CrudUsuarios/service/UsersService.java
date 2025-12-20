@@ -20,11 +20,13 @@ public class UsersService {
     }
     // listar
     public List<Users> listUser(){
-        return repository.findAll();
+        List<Users> list = repository.findAll();
+        return list;
     }
     // buscarPorID
     public Optional<Users> searchById(Long id){
-        return repository.findById(id);
+        Optional<Users> optionalUsers = repository.findById(id);
+        return optionalUsers;
     }
     //atualizar
     public Users update(Long id, Users user) {
