@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 @Tag(name = "cadastrados", description = "gerenciador de cadastro")
-@CrossOrigin(origins = "*")
 public class UsersController {
 
     @Autowired
