@@ -3,6 +3,8 @@ package com.misael.costa.CrudUsuarios.service;
 import com.misael.costa.CrudUsuarios.entity.Users;
 import com.misael.costa.CrudUsuarios.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,17 @@ public class UsersService {
     @Autowired
     private UsersRepository repository;
 
+    private PasswordEncoder passwordEncoder;
+
+    public UsersService(UsersRepository repository) {
+        this.repository = repository;
+        this.passwordEncoder = new BCryptPasswordEncoder();
+    }
+
     // criar
     public Users createUser(Users user){
+        String enconder = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(enconder);
         return repository.save(user);
     }
     // listar
